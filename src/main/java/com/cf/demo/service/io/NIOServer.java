@@ -50,6 +50,7 @@ public class NIOServer {
                             if (key.isAcceptable()) {
                                 try {
                                     // (1) 每来一个新连接，不需要创建一个线程，而是直接注册到clientSelector
+                                    /* 把读请求分给 Handler处理 */
                                     SocketChannel clientChannel = ((ServerSocketChannel) key.channel()).accept();
                                     clientChannel.configureBlocking(false);
                                     clientChannel.register(clientSelector, SelectionKey.OP_READ);
@@ -68,7 +69,7 @@ public class NIOServer {
 
 
         /**
-         * Handler 线程
+         * Handler 单线程
          */
         new Thread(() -> {
             try {
@@ -102,7 +103,9 @@ public class NIOServer {
             } catch (IOException ignored) {
             }
         }).start();
-
+        /* 缺点:
+        * 当其中某个handler阻塞时，会导致剩余的handler都得不到执行
+        * */
 
     }
 }
