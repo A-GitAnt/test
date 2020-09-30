@@ -2,6 +2,7 @@ package com.cf.demo;
 
 import com.cf.demo.service.cache.Account;
 import com.cf.demo.service.cache.AccountService;
+import com.cf.demo.service.sentinel.anno_test.AnnoTest;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -19,6 +21,9 @@ public class DemoApplicationTests {
 
     @Autowired
     private AccountService accountService;
+
+    @Resource
+    private AnnoTest annoTest;
 
     @Test
     public void contextLoads() {
@@ -47,6 +52,15 @@ public class DemoApplicationTests {
         accountService.getAccountByName("somebody1");// 应该走缓存
         accountService.getAccountByName("somebody2");// 应该走缓存
 
+    }
+
+    @Test
+    public void test() throws InterruptedException {
+        int i = 0;
+        while (true) {
+            annoTest.get2(String.valueOf(i++));
+            Thread.sleep(100);
+        }
     }
 
 }
