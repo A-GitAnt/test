@@ -28,7 +28,6 @@ public class IntegerTest {
         System.out.println(a == 1000);
 
 
-
         Integer a1 = new Integer(1000);
         Integer c1 = new Integer(10);
         Integer d1 = new Integer(10);
