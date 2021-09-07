@@ -1,5 +1,10 @@
 package com.cf.demo.service.concurrent.S2;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  * 交替打印奇偶数（0~100），两个线程
  *
@@ -43,12 +48,25 @@ public class EvenThreadV3 {
     }
 
 
+    public static Date StrToDate(String str) {
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = null;
+        try {
+            date = format.parse(str);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
+    }
+
     public static void main(String[] args) {
         long start = System.currentTimeMillis();
 
+        System.out.println(StrToDate("2020-04-11 23:59:59"));
+
         new Thread(new Worker("even")).start();
         new Thread(new Worker("odd")).start();
-
         System.out.println("total Cost: " + (System.currentTimeMillis() - start));
     }
 
