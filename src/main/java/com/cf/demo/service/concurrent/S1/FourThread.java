@@ -24,7 +24,9 @@ public class FourThread implements Runnable {
     private static final int[] array = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
 
     private static Lock lock = new ReentrantLock();
+
     private static Condition condition = lock.newCondition();
+
     private static volatile int currentCount = 0;
 
     private PrintFunction printFunction;

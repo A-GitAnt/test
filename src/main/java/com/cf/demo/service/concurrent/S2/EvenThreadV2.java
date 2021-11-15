@@ -29,9 +29,8 @@ public class EvenThreadV2 {
             while (true) {
                 lock.lock();
                 try {
-                    int i;
-                    while (((i = count & 0x01) == 1 && workerType.equals("odd"))
-                            || ((i = count & 0x01) == 0 && workerType.equals("even"))) {
+                    while (((count & 0x01) == 1 && workerType.equals("even"))
+                            || ((count & 0x01) == 0 && workerType.equals("odd"))) {
                         condition.await();
                     }
 
