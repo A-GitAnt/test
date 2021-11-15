@@ -25,9 +25,8 @@ public class EvenThread {
         public void run() {
             while (true) {
                 synchronized (lock) {
-                    int i = 0;
-                    while (((i = count & 0x01) == 0 && workerType.equals("even"))
-                            || (i= count & 0x01) == 1 && workerType.equals("odd")) {
+                    while (((count & 0x01) == 0 && workerType.equals("even"))
+                            || (count & 0x01) == 1 && workerType.equals("odd")) {
                         try {
                             lock.wait();
                         } catch (InterruptedException e) {
@@ -39,7 +38,7 @@ public class EvenThread {
                         return;
                     }
 
-                    System.out.println(Thread.currentThread()  + String.valueOf(count));
+                    System.out.println(Thread.currentThread() + " " + String.valueOf(count));
                     count += 1;
                     lock.notify();
                 }
