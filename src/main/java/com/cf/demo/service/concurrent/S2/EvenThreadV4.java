@@ -5,7 +5,7 @@ import java.util.concurrent.Executors;
 
 /**
  * 交替打印奇偶数（0~100），两个线程
- * <p>
+ *
  * 使用 volatile 变量控制顺序
  *
  * https://zhuanlan.zhihu.com/p/47948392
